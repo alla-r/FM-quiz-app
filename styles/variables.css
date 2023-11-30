@@ -17,6 +17,14 @@
   --Red: #ee5454;
 }
 
+[data-theme="light"] {
+  --main-bg-color: var(--Light-Grey, #f4f6fa);
+}
+
+[data-theme="dark"] {
+  --main-bg-color: var(--Navy, #3b4d66);
+}
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

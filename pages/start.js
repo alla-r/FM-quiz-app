@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/StartMenu.module.css";
+import Header from "@/components/header";
 
 import iconHTML from "../public/assets/images/icon-html.svg";
 import iconCSS from "../public/assets/images/icon-css.svg";
@@ -59,17 +60,24 @@ export default function StartMenu() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles["content-wrapper"]}>
-          <h1 className="heading-L">
-            Welcome to the <br />
-            <span className="heading-L--bold">Frontend Quiz!</span>
-          </h1>
-          <p className="body-S">Pick a subject to get started.</p>
+      <div className={styles.background}>
+        <Header
+          title="Accessibility"
+          iconSrc={START_MENU_CONFIG[3].imgSrc}
+          iconBgClassName={START_MENU_CONFIG[3].bgClassName}
+        />
+        <main className={`${styles.main} ${inter.className}`}>
+          <div className={styles["content-wrapper"]}>
+            <h1 className="heading-L">
+              Welcome to the <br />
+              <span className="heading-L--bold">Frontend Quiz!</span>
+            </h1>
+            <p className="body-S">Pick a subject to get started.</p>
 
-          <ul>{items}</ul>
-        </div>
-      </main>
+            <ul>{items}</ul>
+          </div>
+        </main>
+      </div>
     </>
   );
 }

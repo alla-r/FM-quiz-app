@@ -34,13 +34,3 @@
 .item:nth-last-child(1) {
   margin-bottom: 0px;
 }
-
-.image-wrapper {
-  margin-right: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-}

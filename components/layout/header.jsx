@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Script from "next/script";
 import Image from "next/image";
 import Switch from "react-switch";
-import LightSunIcon from "../public/assets/images/icon-sun-light.svg";
-import DarkSunIcon from "../public/assets/images/icon-sun-dark.svg";
-import LightMoonIcon from "../public/assets/images/icon-moon-light.svg";
-import DarkMoonIcon from "../public/assets/images/icon-moon-dark.svg";
+import LightSunIcon from "@/public/assets/images/icon-sun-light.svg";
+import DarkSunIcon from "@/public/assets/images/icon-sun-dark.svg";
+import LightMoonIcon from "@/public/assets/images/icon-moon-light.svg";
+import DarkMoonIcon from "@/public/assets/images/icon-moon-dark.svg";
+import Icon from "../ui/icon";
 import styles from "./header.module.css";
 
-function Header({ title, iconSrc, iconBgClassName }) {
+function Header({ title, iconConfig }) {
   const [theme, setTheme] = useState();
 
   const toggleTheme = () => {
@@ -47,9 +48,7 @@ function Header({ title, iconSrc, iconBgClassName }) {
       </Script>
       <header className={styles.header}>
         <div>
-          <div className={`${styles.iconBg} ${iconBgClassName}`}>
-            <Image src={iconSrc} alt={`${title} icon`} width={29} height={29} />
-          </div>
+          <Icon {...iconConfig} />
           <h1 className="heading-S">{title}</h1>
         </div>
 

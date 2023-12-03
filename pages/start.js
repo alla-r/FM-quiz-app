@@ -3,12 +3,13 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/StartMenu.module.css";
-import Header from "@/components/header";
+import Header from "@/components/layout/header";
 
 import iconHTML from "../public/assets/images/icon-html.svg";
 import iconCSS from "../public/assets/images/icon-css.svg";
 import iconJS from "../public/assets/images/icon-js.svg";
 import iconAccessibility from "../public/assets/images/icon-accessibility.svg";
+import Icon from "@/components/ui/icon";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,39 +19,50 @@ export default function StartMenu() {
       id: "html",
       text: "HTML",
       imgSrc: iconHTML,
-      bgClassName: "orange-bg",
+      iconBG: "orange",
     },
     {
       id: "css",
       text: "CSS",
       imgSrc: iconCSS,
-      bgClassName: "green-bg",
+      iconBG: "green",
     },
     {
       id: "js",
       text: "Javascript",
       imgSrc: iconJS,
-      bgClassName: "blue-bg",
+      iconBG: "blue",
     },
     {
       id: "accessibility",
       text: "Accessibility",
       imgSrc: iconAccessibility,
-      bgClassName: "purple-bg",
+      iconBG: "purple",
     },
   ];
 
-  const items = START_MENU_CONFIG.map(({ id, text, imgSrc, bgClassName }) => {
+  const items = START_MENU_CONFIG.map(({ id, text, imgSrc, iconBG }) => {
+    const iconConfig = {
+      color: iconBG,
+      content: { type: "icon", value: imgSrc },
+      altText: `${text} image`,
+    };
+
     return (
       <li key={id} className={styles.item}>
-        <div className={`${styles["image-wrapper"]} ${bgClassName}`}>
-          <Image src={imgSrc} alt={`${text} image`} width={25} height={25} />
-        </div>
+        <Icon {...iconConfig} />
 
         <h3 className="heading-S">{text}</h3>
       </li>
     );
   });
+
+  // TODO remove iconConfig and make auto
+  const iconConfig = {
+    color: START_MENU_CONFIG[3].iconBG,
+    content: { type: "icon", value: START_MENU_CONFIG[3].imgSrc },
+    altText: `Accessibility image`,
+  };
 
   return (
     <>
@@ -61,11 +73,7 @@ export default function StartMenu() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.background}>
-        <Header
-          title="Accessibility"
-          iconSrc={START_MENU_CONFIG[3].imgSrc}
-          iconBgClassName={START_MENU_CONFIG[3].bgClassName}
-        />
+        <Header title="Accessibility" iconConfig={iconConfig} />
         <main className={`${styles.main} ${inter.className}`}>
           <div className={styles["content-wrapper"]}>
             <h1 className="heading-L">

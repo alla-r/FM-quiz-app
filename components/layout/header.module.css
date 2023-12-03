@@ -1,0 +1,22 @@
+.header {
+  margin-bottom: 32px;
+  padding: 16px 24px;
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header > div {
+  display: flex;
+  align-items: center;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  margin: 0 8px;
+}

@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Script from "next/script";
 import Image from "next/image";
-import Switch from "react-switch";
+import dynamic from "next/dynamic";
 import LightSunIcon from "@/public/assets/images/icon-sun-light.svg";
 import DarkSunIcon from "@/public/assets/images/icon-sun-dark.svg";
 import LightMoonIcon from "@/public/assets/images/icon-moon-light.svg";
 import DarkMoonIcon from "@/public/assets/images/icon-moon-dark.svg";
 import Icon from "../ui/icon";
 import styles from "./header.module.css";
+
+const DynamicSwitch = dynamic(() => import("../ui/themeSwitch"), {
+  ssr: false,
+});
 
 function Header({ title, iconConfig }) {
   const [theme, setTheme] = useState();
@@ -47,10 +51,12 @@ function Header({ title, iconConfig }) {
         `}
       </Script>
       <header className={styles.header}>
-        <div>
-          <Icon {...iconConfig} />
-          <h1 className="heading-S">{title}</h1>
-        </div>
+        {title && (
+          <div className={styles.title}>
+            {iconConfig && <Icon {...iconConfig} />}
+            <h1 className="heading-S">{title}</h1>
+          </div>
+        )}
 
         <div className={styles.toggle}>
           <Image
@@ -60,20 +66,7 @@ function Header({ title, iconConfig }) {
             height={16}
           />
 
-          <Switch
-            className={styles.switch}
-            onChange={toggleTheme}
-            checked={theme === "dark"}
-            checkedIcon={false}
-            uncheckedIcon={false}
-            width={32}
-            height={20}
-            handleDiameter={12}
-            onColor="#a729f5"
-            offColor="#a729f5"
-            boxShadow="none"
-            activeBoxShadow="none"
-          />
+          <DynamicSwitch theme={theme} toggleThemeHandler={toggleTheme} />
 
           <Image
             src={theme === "light" ? DarkMoonIcon : LightMoonIcon}

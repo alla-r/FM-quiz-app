@@ -1,9 +1,8 @@
 .header {
-  margin-bottom: 32px;
   padding: 16px 24px;
   height: 72px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -12,11 +11,43 @@
   align-items: center;
 }
 
+.title {
+  flex: 1 0 0;
+}
+
+.title h1 {
+  margin-left: 16px;
+}
+
 .toggle {
   display: flex;
   align-items: center;
 }
 
-.switch {
-  margin: 0 8px;
+.toggle img {
+  width: 16px;
+  height: 16px;
+}
+
+@media only screen and (min-width: 37.5em) {
+  .header {
+    padding: 40px 64px;
+    height: 136px;
+  }
+
+  .toggle img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .title h1 {
+    margin-left: 24px;
+  }
+}
+
+@media only screen and (min-width: 70em) {
+  .header {
+    padding: 83px 140px 83px 143px;
+    height: 222px;
+  }
 }

@@ -1,0 +1,9 @@
+.switch {
+  margin: 0 8px;
+}
+
+@media only screen and (min-width: 37.5em) {
+  .switch {
+    margin: 0 16px;
+  }
+}

@@ -76,11 +76,13 @@ export default function StartMenu() {
         <Header title="Accessibility" iconConfig={iconConfig} />
         <main className={`${styles.main} ${inter.className}`}>
           <div className={styles["content-wrapper"]}>
-            <h1 className="heading-L">
-              Welcome to the <br />
-              <span className="heading-L--bold">Frontend Quiz!</span>
-            </h1>
-            <p className="body-S">Pick a subject to get started.</p>
+            <div className={styles.column}>
+              <h1 className="heading-L">
+                Welcome to the <br />
+                <span className="heading-L--bold">Frontend Quiz!</span>
+              </h1>
+              <p className="body-S">Pick a subject to get started.</p>
+            </div>
 
             <ul>{items}</ul>
           </div>

@@ -26,8 +26,7 @@ function Header({ title, iconConfig }) {
 
   const defaultTheme = () => {
     const themeLocalStorage = localStorage.getItem("theme");
-    const themeSystem = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
+    const themeSystem = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
 

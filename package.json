@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --check . ",
+    "prettier-fix": "prettier . --write"
   },
   "dependencies": {
     "next": "14.0.3",
@@ -14,5 +16,10 @@
     "react-dom": "^18",
     "react-responsive": "^9.0.2",
     "react-switch": "^7.0.0"
+  },
+  "devDependencies": {
+    "eslint": "8.55.0",
+    "eslint-config-next": "14.0.3",
+    "prettier": "3.0.3"
   }
 }

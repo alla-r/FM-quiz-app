@@ -1,68 +1,40 @@
+import { promises as fs } from "fs";
 import React from "react";
 import Head from "next/head";
-import Image from "next/image";
+import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
 import styles from "@/styles/StartMenu.module.css";
 import Header from "@/components/layout/header";
-
-import iconHTML from "../public/assets/images/icon-html.svg";
-import iconCSS from "../public/assets/images/icon-css.svg";
-import iconJS from "../public/assets/images/icon-js.svg";
-import iconAccessibility from "../public/assets/images/icon-accessibility.svg";
 import Icon from "@/components/ui/icon";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function StartMenu() {
-  const START_MENU_CONFIG = [
-    {
-      id: "html",
-      text: "HTML",
-      imgSrc: iconHTML,
-      iconBG: "orange",
-    },
-    {
-      id: "css",
-      text: "CSS",
-      imgSrc: iconCSS,
-      iconBG: "green",
-    },
-    {
-      id: "js",
-      text: "Javascript",
-      imgSrc: iconJS,
-      iconBG: "blue",
-    },
-    {
-      id: "accessibility",
-      text: "Accessibility",
-      imgSrc: iconAccessibility,
-      iconBG: "purple",
-    },
-  ];
+function StartMenu({ startMenuConfig }) {
+  const router = useRouter();
 
-  const items = START_MENU_CONFIG.map(({ id, text, imgSrc, iconBG }) => {
+  const items = startMenuConfig.map(({ id, text, imgSrc, iconBG }) => {
     const iconConfig = {
       color: iconBG,
       content: { type: "icon", value: imgSrc },
       altText: `${text} image`,
     };
 
+    const onQuizSelected = (id) => {
+      console.log(id);
+      router.push({
+        pathname: "questions/[group]/[id]",
+        query: { id: 1, group: id },
+      });
+    };
+
     return (
-      <li key={id} className={styles.item}>
+      <li key={id} className={styles.item} onClick={() => onQuizSelected(id)}>
         <Icon {...iconConfig} />
 
         <h3 className="heading-S">{text}</h3>
       </li>
     );
   });
-
-  // TODO remove iconConfig and make auto
-  const iconConfig = {
-    color: START_MENU_CONFIG[3].iconBG,
-    content: { type: "icon", value: START_MENU_CONFIG[3].imgSrc },
-    altText: `Accessibility image`,
-  };
 
   return (
     <>
@@ -73,7 +45,7 @@ export default function StartMenu() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.background}>
-        <Header title="Accessibility" iconConfig={iconConfig} />
+        <Header />
         <main className={`${styles.main} ${inter.className}`}>
           <div className={styles["content-wrapper"]}>
             <div className={styles.column}>
@@ -91,3 +63,35 @@ export default function StartMenu() {
     </>
   );
 }
+
+export async function getStaticProps() {
+  const jsonData = await fs.readFile(process.cwd() + "/data/data.json", "utf8");
+  const data = JSON.parse(jsonData);
+  let startMenuConfig = [];
+
+  if (data && data.quizzes) {
+    const colorBG = {
+      HTML: "orange",
+      CSS: "green",
+      JavaScript: "blue",
+      Accessibility: "purple",
+    };
+
+    startMenuConfig = data.quizzes.map(({ title, icon }) => {
+      return {
+        id: title,
+        text: title,
+        imgSrc: icon,
+        iconBG: colorBG[title] || "orange",
+      };
+    });
+  } else {
+    return {
+      notFound: true,
+    };
+  }
+
+  return { props: { startMenuConfig } };
+}
+
+export default StartMenu;

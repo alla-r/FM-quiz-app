@@ -39,6 +39,26 @@ ol {
   background-color: #f6e7ff;
 }
 
+.grey-bg {
+  background-color: var(--Light-Grey, #f4f6fa);
+  color: var(--Grey-Navy, #626c7f);
+}
+
+.selected {
+  background-color: var(--Purple, #a729f5) !important;
+  color: var(--White, #ffffff);
+}
+
+.success {
+  background-color: var(--Green, #26d782) !important;
+  color: var(--White, #ffffff);
+}
+
+.error {
+  background-color: var(--Red, #ee5454) !important;
+  color: var(--White, #ffffff);
+}
+
 .heading-S {
   color: var(--main-fg-color);
   font-family: var(--font-rubik);

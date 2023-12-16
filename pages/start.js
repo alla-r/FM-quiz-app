@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/StartMenu.module.css";
 import Header from "@/components/layout/header";
 import Icon from "@/components/ui/icon";
+import ItemRow from "@/components/ui/itemRow";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +23,19 @@ function StartMenu({ startMenuConfig }) {
     const onQuizSelected = (id) => {
       console.log(id);
       router.push({
-        pathname: "questions/[group]/[id]",
-        query: { id: 1, group: id },
+        pathname: "questions/[quiz]/[id]",
+        query: { id: 1, quiz: id },
       });
     };
 
     return (
-      <li key={id} className={styles.item} onClick={() => onQuizSelected(id)}>
-        <Icon {...iconConfig} />
-
-        <h3 className="heading-S">{text}</h3>
-      </li>
+      <ItemRow
+        key={id}
+        id={id}
+        content={text}
+        onRowClick={() => onQuizSelected(id)}
+        iconConfig={iconConfig}
+      />
     );
   });
 

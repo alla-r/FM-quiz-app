@@ -3,25 +3,14 @@ import Image from "next/image";
 
 import styles from "./icon.module.css";
 
-function Icon({ color, content, altText }) {
-  // const bgColorClassNameMapping = {
-  //   orange: "orange-bg",
-  //   green: "green-bg",
-  //   blue: "orange-bg",
-  //   purple: "purple-bg",
-  //   selected: "",
-  //   unselected: "",
-  //   success: "",
-  //   error: "",
-  // };
-
+function Icon({ color, content, altText, status = "" }) {
   return (
-    <div className={`${styles.square} ${color}-bg`}>
+    <div className={`${styles.square} ${color}-bg ${status}`}>
       {content.type === "icon" && (
         <Image src={content.value} alt={altText} width={25} height={25} />
       )}
 
-      {content.type === "text" && <p>{content.value}</p>}
+      {content.type === "text" && <div className="heading-S">{content.value}</div>}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 .square {
+  flex: 40px 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,10 +13,16 @@
   height: 28px;
 }
 
+.square div {
+  color: inherit;
+}
+
 @media only screen and (min-width: 37.5em) {
   .square {
+    flex: 56px 0 0;
     width: 56px;
     height: 56px;
+    border-radius: 12px;
   }
 
   .square img {

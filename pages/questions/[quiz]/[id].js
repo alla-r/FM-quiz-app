@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { promises as fs } from "fs";
 // import { useRouter } from "next/router";
 import Header from "@/components/layout/header";
 import ItemRow from "@/components/ui/itemRow";
+import { getAllQuizzes } from "@/helpers/api-util";
+import { getQuestionDetailsProps, getStartMenuPaths } from "@/helpers/dataFormatters";
+// TODO move styles to general
 import startMenuStyles from "@/styles/StartMenu.module.css";
 
+// TODO add block
 function QuestionPage({ questionDetails }) {
   const [selectedOption, setSelectedOption] = useState("false");
   const optionLetter = ["A", "B", "C", "D"];
@@ -67,43 +70,25 @@ function QuestionPage({ questionDetails }) {
   );
 }
 
+// TODO add try catch, dynamic path generation
+// add header icon config
+
 export async function getStaticProps(context) {
   const { params } = context;
-
   const questionNumber = params.id;
   const quiz = params.quiz;
 
-  const jsonData = await fs.readFile(process.cwd() + "/data/data.json");
-  const data = JSON.parse(jsonData);
-  const questions = data.quizzes.find((el) => el.title === quiz).questions;
-  const questionDetails = questions[questionNumber - 1];
+  const data = await getAllQuizzes();
 
-  if (!questionDetails) {
-    return {
-      notFound: true,
-    };
-  } else {
-    questionDetails.currentQuestion = questionNumber;
-    questionDetails.amountOfQuestions = questions.length;
-  }
-
-  return {
-    props: {
-      questionDetails,
-    },
-  };
+  return getQuestionDetailsProps(data, quiz, questionNumber);
 }
 
 export async function getStaticPaths() {
+  const data = await getAllQuizzes();
+
+  const pathsConfig = getStartMenuPaths(data);
   return {
-    paths: [
-      {
-        params: { id: "1", quiz: "HTML" },
-        params: { id: "1", quiz: "CSS" },
-        params: { id: "1", quiz: "JavaScript" },
-        params: { id: "1", quiz: "Accessibility" },
-      },
-    ],
+    paths: pathsConfig,
     fallback: "blocking",
   };
 }

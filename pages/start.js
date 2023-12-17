@@ -1,12 +1,12 @@
-import { promises as fs } from "fs";
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
 import styles from "@/styles/StartMenu.module.css";
 import Header from "@/components/layout/header";
-import Icon from "@/components/ui/icon";
 import ItemRow from "@/components/ui/itemRow";
+import { getAllQuizzes } from "@/helpers/api-util";
+import { getStartMenuProps } from "@/helpers/dataFormatters";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -68,33 +68,9 @@ function StartMenu({ startMenuConfig }) {
 }
 
 export async function getStaticProps() {
-  const jsonData = await fs.readFile(process.cwd() + "/data/data.json", "utf8");
-  const data = JSON.parse(jsonData);
-  let startMenuConfig = [];
+  const data = await getAllQuizzes();
 
-  if (data && data.quizzes) {
-    const colorBG = {
-      HTML: "orange",
-      CSS: "green",
-      JavaScript: "blue",
-      Accessibility: "purple",
-    };
-
-    startMenuConfig = data.quizzes.map(({ title, icon }) => {
-      return {
-        id: title,
-        text: title,
-        imgSrc: icon,
-        iconBG: colorBG[title] || "orange",
-      };
-    });
-  } else {
-    return {
-      notFound: true,
-    };
-  }
-
-  return { props: { startMenuConfig } };
+  return getStartMenuProps(data);
 }
 
 export default StartMenu;

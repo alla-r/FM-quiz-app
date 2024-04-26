@@ -70,7 +70,7 @@ function QuestionPage({ questionDetails }) {
   );
 }
 
-// TODO add try catch, dynamic path generation
+// TODO add try catch
 // add header icon config
 
 export async function getStaticProps(context) {

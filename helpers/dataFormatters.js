@@ -1,8 +1,4 @@
-const getStartMenuProps = (data) => {
-  let result = {
-    notFound: true,
-  };
-
+const getIconConfig = (quiz, imgSrc) => {
   const colorBG = {
     HTML: "orange",
     CSS: "green",
@@ -10,13 +6,24 @@ const getStartMenuProps = (data) => {
     Accessibility: "purple",
   };
 
+  return {
+    color: colorBG[quiz] || "orange",
+    content: { type: "icon", value: imgSrc },
+    altText: `${quiz} image`,
+  };
+};
+
+const getStartMenuProps = (data) => {
+  let result = {
+    notFound: true,
+  };
+
   if (data && data.quizzes && data.quizzes.length > 0) {
     const startMenuConfig = data.quizzes.map(({ title, icon }) => {
       return {
         id: title,
         text: title,
-        imgSrc: icon,
-        iconBG: colorBG[title] || "orange",
+        iconConfig: getIconConfig(title, icon),
       };
     });
 
@@ -36,8 +43,12 @@ const getQuestionDetailsProps = (data, quiz, questionNumber) => {
   };
 
   if (data && data.quizzes && data.quizzes.length > 0) {
-    const questions = data.quizzes.find((el) => el.title === quiz).questions;
+    const quizBlock = data.quizzes.find((el) => el.title === quiz);
+    const questions = quizBlock.questions;
     const questionDetails = questions[questionNumber - 1];
+
+    questionDetails.iconConfig = getIconConfig(quiz, quizBlock.icon);
+    questionDetails.quizName = quiz;
 
     if (questionDetails) {
       questionDetails.currentQuestion = questionNumber;

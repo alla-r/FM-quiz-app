@@ -12,15 +12,8 @@ const inter = Inter({ subsets: ["latin"] });
 function StartMenu({ startMenuConfig }) {
   const router = useRouter();
 
-  const items = startMenuConfig.map(({ id, text, imgSrc, iconBG }) => {
-    const iconConfig = {
-      color: iconBG,
-      content: { type: "icon", value: imgSrc },
-      altText: `${text} image`,
-    };
-
+  const items = startMenuConfig.map(({ id, text, imgSrc, iconBG, iconConfig }) => {
     const onQuizSelected = (id) => {
-      // console.log(id);
       router.push({
         pathname: "questions/[quiz]/[id]",
         query: { id: 1, quiz: id },

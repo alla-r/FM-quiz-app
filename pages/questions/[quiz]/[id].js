@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useRouter } from "next/router";
 import Header from "@/components/layout/header";
 import ItemRow from "@/components/ui/itemRow";
 import { getAllQuizzes } from "@/helpers/api-util";
@@ -11,15 +10,8 @@ import startMenuStyles from "@/styles/StartMenu.module.css";
 function QuestionPage({ questionDetails }) {
   const [selectedOption, setSelectedOption] = useState("false");
   const optionLetter = ["A", "B", "C", "D"];
-  const { options, currentQuestion, question, answer, amountOfQuestions } = questionDetails;
-
-  // const router = useRouter();
-  // TODO remove iconConfig and make auto
-  // const iconConfig = {
-  //   // color: START_MENU_CONFIG[3].iconBG,
-  //   // content: { type: "icon", value: START_MENU_CONFIG[3].imgSrc },
-  //   altText: `Accessibility image`,
-  // };
+  const { options, currentQuestion, question, answer, amountOfQuestions, iconConfig } =
+    questionDetails;
 
   const items = options.map((option, i) => {
     const optionCharacter = optionLetter[i];
@@ -47,14 +39,10 @@ function QuestionPage({ questionDetails }) {
     );
   });
 
-  // console.log(router.query); // {id: 1, quiz: 'HTML'}
-
   return (
     <>
       <div className={startMenuStyles.background}>
-        <Header
-        // title="Accessibility" iconConfig={iconConfig}
-        />
+        <Header title={questionDetails.quizName} iconConfig={iconConfig} />
         <main className={startMenuStyles.main}>
           <div className={startMenuStyles["content-wrapper"]}>
             <div className={startMenuStyles.column}>
@@ -71,7 +59,6 @@ function QuestionPage({ questionDetails }) {
 }
 
 // TODO add try catch
-// add header icon config
 
 export async function getStaticProps(context) {
   const { params } = context;

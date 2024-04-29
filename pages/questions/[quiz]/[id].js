@@ -3,8 +3,7 @@ import Header from "@/components/layout/header";
 import ItemRow from "@/components/ui/itemRow";
 import { getAllQuizzes } from "@/helpers/api-util";
 import { getQuestionDetailsProps, getStartMenuPaths } from "@/helpers/dataFormatters";
-// TODO move styles to general
-import startMenuStyles from "@/styles/StartMenu.module.css";
+import generalStyles from "@/styles/General.module.css";
 
 // TODO add block
 function QuestionPage({ questionDetails }) {
@@ -41,11 +40,11 @@ function QuestionPage({ questionDetails }) {
 
   return (
     <>
-      <div className={startMenuStyles.background}>
+      <div className={generalStyles.background}>
         <Header title={questionDetails.quizName} iconConfig={iconConfig} />
-        <main className={startMenuStyles.main}>
-          <div className={startMenuStyles["content-wrapper"]}>
-            <div className={startMenuStyles.column}>
+        <main className={generalStyles.main}>
+          <div className={generalStyles["content-wrapper"]}>
+            <div className={generalStyles.column}>
               <p className="body-S">{`Question ${currentQuestion} of ${amountOfQuestions}`}</p>
               <h1 className="heading-M">{question}</h1>
             </div>

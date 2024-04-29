@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "@/components/layout/header";
 import ItemRow from "@/components/ui/itemRow";
+import CustomButton from "@/components/ui/button";
 import { getAllQuizzes } from "@/helpers/api-util";
 import { getQuestionDetailsProps, getStartMenuPaths } from "@/helpers/dataFormatters";
 import generalStyles from "@/styles/General.module.css";
@@ -48,8 +49,10 @@ function QuestionPage({ questionDetails }) {
               <p className="body-S">{`Question ${currentQuestion} of ${amountOfQuestions}`}</p>
               <h1 className="heading-M">{question}</h1>
             </div>
-
-            <ul>{items}</ul>
+            <div>
+              <ul>{items}</ul>
+              <CustomButton text="Submit Answer" />
+            </div>
           </div>
         </main>
       </div>

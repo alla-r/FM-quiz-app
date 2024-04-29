@@ -23,6 +23,12 @@ ol {
   list-style-type: none;
 }
 
+button {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
 .orange-bg {
   background-color: #fff1e9;
 }

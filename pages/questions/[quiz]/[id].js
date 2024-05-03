@@ -8,7 +8,7 @@ import generalStyles from "@/styles/General.module.css";
 
 // TODO add block
 function QuestionPage({ questionDetails }) {
-  const [selectedOption, setSelectedOption] = useState("false");
+  const [selectedOption, setSelectedOption] = useState(null);
   const optionLetter = ["A", "B", "C", "D"];
   const { options, currentQuestion, question, answer, amountOfQuestions, iconConfig } =
     questionDetails;
@@ -39,6 +39,13 @@ function QuestionPage({ questionDetails }) {
     );
   });
 
+  const BUTTON_SUBMIT_ANSWER = "Submit Answer";
+  const BUTTON_NEXT_QUESTION = "Next Question";
+
+  const submitAnswerCB = () => {
+    alert(selectedOption);
+  };
+
   return (
     <>
       <div className={generalStyles.background}>
@@ -51,7 +58,10 @@ function QuestionPage({ questionDetails }) {
             </div>
             <div>
               <ul>{items}</ul>
-              <CustomButton text="Submit Answer" />
+              <CustomButton
+                onButtonClick={selectedOption ? submitAnswerCB : () => {}}
+                text={BUTTON_SUBMIT_ANSWER}
+              />
             </div>
           </div>
         </main>

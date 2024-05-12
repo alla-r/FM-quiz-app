@@ -65,6 +65,14 @@ button {
   color: var(--White, #ffffff);
 }
 
+.success-border {
+  border: 3px solid var(--Green);
+}
+
+.error-border {
+  border: 3px solid var(--Red);
+}
+
 .heading-S {
   color: var(--main-fg-color);
   font-family: var(--font-rubik);

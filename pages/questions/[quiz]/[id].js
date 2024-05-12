@@ -5,6 +5,8 @@ import CustomButton from "@/components/ui/button";
 import { getAllQuizzes } from "@/helpers/api-util";
 import { getQuestionDetailsProps, getStartMenuPaths } from "@/helpers/dataFormatters";
 import generalStyles from "@/styles/General.module.css";
+import successIcon from "@/public/assets/images/icon-correct.svg";
+import errorIcon from "@/public/assets/images/icon-incorrect.svg";
 
 // TODO add block
 function QuestionPage({ questionDetails }) {
@@ -13,28 +15,47 @@ function QuestionPage({ questionDetails }) {
   const { options, currentQuestion, question, answer, amountOfQuestions, iconConfig } =
     questionDetails;
 
+  // TODO: replace hard code with state handling logic
+  // Status: selected, error, success
+  const status = "";
+  const isSubmitted = false;
+
   const items = options.map((option, i) => {
     const optionCharacter = optionLetter[i];
     const iconConfig = {
       color: "grey",
       content: { type: "text", value: optionCharacter },
       altText: `${optionCharacter} icon`,
-      status: option === answer,
+      status: status,
+    };
+
+    const ADDITIONAL_ICON_SRC = {
+      success: successIcon,
+      error: errorIcon,
+    };
+
+    // TODO: think about additionalIconConfig
+    const additionalIconConfig = {
+      content: {
+        type: "icon",
+        value: ADDITIONAL_ICON_SRC[status],
+      },
+      altText: `${status} icon`,
     };
 
     const onOptionSelected = (selectedOption) => {
       setSelectedOption(selectedOption);
+      console.log(selectedOption);
     };
 
     return (
       <ItemRow
         key={option}
-        id={option}
         content={option}
         onRowClick={() => onOptionSelected(option)}
+        additionalIconConfig={isSubmitted && additionalIconConfig}
         iconConfig={iconConfig}
-        selectedOption={selectedOption}
-        type="quizOption"
+        status={status}
       />
     );
   });
@@ -42,8 +63,9 @@ function QuestionPage({ questionDetails }) {
   const BUTTON_SUBMIT_ANSWER = "Submit Answer";
   const BUTTON_NEXT_QUESTION = "Next Question";
 
-  const submitAnswerCB = () => {
-    alert(selectedOption);
+  const onSubmitAnswer = () => {
+    debugger;
+    console.log(selectedOption);
   };
 
   return (
@@ -59,7 +81,7 @@ function QuestionPage({ questionDetails }) {
             <div>
               <ul>{items}</ul>
               <CustomButton
-                onButtonClick={selectedOption ? submitAnswerCB : () => {}}
+                onButtonClick={selectedOption ? onSubmitAnswer : () => {}}
                 text={BUTTON_SUBMIT_ANSWER}
               />
             </div>

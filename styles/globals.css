@@ -52,17 +52,17 @@ button {
 
 .selected {
   background-color: var(--Purple, #a729f5) !important;
-  color: var(--White, #ffffff);
+  color: var(--Pure-White, #ffffff);
 }
 
 .success {
   background-color: var(--Green, #26d782) !important;
-  color: var(--White, #ffffff);
+  color: var(--Pure-White, #ffffff);
 }
 
 .error {
   background-color: var(--Red, #ee5454) !important;
-  color: var(--White, #ffffff);
+  color: var(--Pure-White, #ffffff);
 }
 
 .success-border {

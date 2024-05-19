@@ -23,7 +23,7 @@
   --body-s-color: var(--Grey-Navy, #626c7f);
   --item-bg-color: var(--Pure-White, #ffffff);
   --button-bg-color: var(--Purple, #a729f5);
-  --button-bg-color-hover: color-mix(in srgb, var(--Purple, #a729f5), white 50%);
+  --button-bg-color-hover: color-mix(in srgb, var(--Purple, #a729f5), #ffffff 50%);
 
   --shadow: 0px 16px 40px 0px rgba(143, 160, 193, 0.14);
 }
@@ -34,7 +34,7 @@
   --body-s-color: var(--Light-Bluish, #abc1e1);
   --item-bg-color: var(--Navy, #3b4d66);
   --button-bg-color: var(--Purple, #a729f5);
-  --button-bg-color-hover: color-mix(in srgb, var(--Purple, #a729f5), white 50%);
+  --button-bg-color-hover: color-mix(in srgb, var(--Purple, #a729f5), #ffffff 50%);
 
   --shadow: 0px 16px 40px 0px rgba(49, 62, 81, 0.14);
 }

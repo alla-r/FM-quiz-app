@@ -42,7 +42,7 @@ function StartMenu({ startMenuConfig }) {
                 Welcome to the <br />
                 <span className="heading-L--bold">Frontend Quiz!</span>
               </h1>
-              <p className="body-S">Pick a subject to get started.</p>
+              <p className={`${styles.description} body-S`}>Pick a subject to get started.</p>
             </div>
 
             <ul>{items}</ul>

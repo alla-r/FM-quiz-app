@@ -1,0 +1,53 @@
+.header {
+  margin-bottom: 8px;
+}
+
+.header h1 {
+  font-weight: 300;
+}
+
+.result-wrapper {
+  margin-top: 40px;
+  padding: 2rem;
+  background-color: var(--Pure-White);
+  border-radius: 0.75rem;
+  text-align: center;
+  font-family: var(--font-rubik);
+}
+
+.score {
+  font-weight: 500;
+  font-size: 5.5rem;
+  line-height: 100%;
+  color: var(--Dark-Navy, #313e51);
+}
+
+.score-description {
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 1.12rem;
+  line-height: 100%;
+  color: var(--Grey-Navy, #626c7f);
+}
+
+@media only screen and (min-width: 37.5em) {
+  .result-wrapper {
+    padding: 3rem;
+    border-radius: 1.5rem;
+  }
+
+  .score {
+    font-size: 9rem;
+  }
+
+  .score-description {
+    font-size: 1.5rem;
+    line-height: 150%;
+  }
+}
+
+@media only screen and (min-width: 70em) {
+  .result-wrapper {
+    margin-top: 0px;
+  }
+}

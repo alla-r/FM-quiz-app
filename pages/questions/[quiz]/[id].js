@@ -2,36 +2,33 @@ import React, { useState } from "react";
 import Header from "@/components/layout/header";
 import ItemRow from "@/components/ui/itemRow";
 import CustomButton from "@/components/ui/button";
+import ErrorMessage  from "@/components/ui/errorMessage";
 import { getAllQuizzes } from "@/helpers/api-util";
 import { getQuestionDetailsProps, getStartMenuPaths } from "@/helpers/dataFormatters";
+import { OPTION_LETTERS, ADDITIONAL_ICON_SRC, BUTTON_SUBMIT_ANSWER, BUTTON_NEXT_QUESTION } from "@/helpers/constants";
 import generalStyles from "@/styles/General.module.css";
-import successIcon from "@/public/assets/images/icon-correct.svg";
-import errorIcon from "@/public/assets/images/icon-incorrect.svg";
 
 // TODO add block
 function QuestionPage({ questionDetails }) {
   const [selectedOption, setSelectedOption] = useState(null);
-  const optionLetter = ["A", "B", "C", "D"];
+  const [isErrorVisible, setIsErrorVisible] = useState(null);
+  const [quizInfo, setQuizInfo] = useState({});
+
   const { options, currentQuestion, question, answer, amountOfQuestions, iconConfig } =
     questionDetails;
 
   // TODO: replace hard code with state handling logic
   // Status: selected, error, success
-  const status = "";
-  const isSubmitted = false;
+  const status = "error";
+  const isSubmitted = true;
 
   const items = options.map((option, i) => {
-    const optionCharacter = optionLetter[i];
+    const optionCharacter = OPTION_LETTERS[i];
     const iconConfig = {
       color: "grey",
       content: { type: "text", value: optionCharacter },
       altText: `${optionCharacter} icon`,
       status: status,
-    };
-
-    const ADDITIONAL_ICON_SRC = {
-      success: successIcon,
-      error: errorIcon,
     };
 
     // TODO: think about additionalIconConfig
@@ -44,6 +41,7 @@ function QuestionPage({ questionDetails }) {
     };
 
     const onOptionSelected = (selectedOption) => {
+      setIsErrorVisible(false);
       setSelectedOption(selectedOption);
       console.log(selectedOption);
     };
@@ -60,12 +58,13 @@ function QuestionPage({ questionDetails }) {
     );
   });
 
-  const BUTTON_SUBMIT_ANSWER = "Submit Answer";
-  const BUTTON_NEXT_QUESTION = "Next Question";
-
   const onSubmitAnswer = () => {
     debugger;
     console.log(selectedOption);
+    if (!selectedOption) {
+      setIsErrorVisible(true);
+      return;
+    }
   };
 
   return (
@@ -81,9 +80,10 @@ function QuestionPage({ questionDetails }) {
             <div>
               <ul>{items}</ul>
               <CustomButton
-                onButtonClick={selectedOption ? onSubmitAnswer : () => {}}
+                onButtonClick={onSubmitAnswer}
                 text={BUTTON_SUBMIT_ANSWER}
               />
+              {isErrorVisible && <ErrorMessage />}
             </div>
           </div>
         </main>

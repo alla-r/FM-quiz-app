@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Header from "@/components/layout/header";
-import ItemRow from "@/components/ui/itemRow";
 import CustomButton from "@/components/ui/button";
+import { QUIZ_COMPLETED, YOU_SCORED, PLAY_AGAIN } from "@/helpers/constants";
 import generalStyles from "@/styles/General.module.css";
 import styles from "@/styles/Result.module.css";
 
 function QuestionPage() {
   const router = useRouter();
 
-  const QUIZ_COMPLETED = "Quiz completed";
-  const YOU_SCORED = "You scored...";
-  const PLAY_AGAIN = "Play Again";
-
+  // TODO: add logic
   const questionAmount = 10;
   const score = 8;
 

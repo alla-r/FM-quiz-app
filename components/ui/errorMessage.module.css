@@ -1,0 +1,18 @@
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-rubik);
+  font-size: 1.12rem;
+  line-height: 100%;
+  color: var(--Red);
+}
+
+@media only screen and (min-width: 37.5em) {
+  .error {
+    font-size: 1.5rem;
+    line-height: 150%;
+  }
+}
